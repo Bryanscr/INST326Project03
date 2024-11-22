@@ -11,12 +11,14 @@ class Caregiver:
     def set_available(self, day, shift):
         if day not in self.availability:
             self.availability[day] = {}
-        self.availability[day][shift] = True
+        if shift in ["AM", "PM"]:
+            self.availability[day][shift] = True
 
     def set_unavailable(self, day, shift):
         if day not in self.availability:
             self.availability[day] = {}
-        self.availability[day][shift] = False
+        if shift in ["AM", "PM"]:
+            self.availability[day][shift] = False
 
     def get_availability(self):
         return self.availability
@@ -27,15 +29,31 @@ class CaregiverManager:
         self.caregivers = []
 
     def add_caregiver(self, caregiver):
-        self.caregivers.append(caregiver)
+        if not any(c.email == caregiver.email for c in self.caregivers):
+            self.caregivers.append(caregiver)
+        else:
+            print(f"Caregiver with email {caregiver.email} already exists.")
 
     def list_caregivers(self):
-        print("List of Caregivers:")
+        print("\nList of Caregivers:")
+        if not self.caregivers:
+            print("No caregivers added yet.")
+            return
         for caregiver in self.caregivers:
-            print(f"Name: {caregiver.name}, Phone: {caregiver.phone}, Email: {caregiver.email}, Pay Rate: ${caregiver.pay_rate}/hr")
+            print(
+                f"Name: {caregiver.name}, Phone: {caregiver.phone}, "
+                f"Email: {caregiver.email}, Pay Rate: ${caregiver.pay_rate}/hr"
+            )
 
     def display_availability(self):
+        print("\nCaregiver Availability:")
+        if not self.caregivers:
+            print("No caregivers added yet.")
+            return
         for caregiver in self.caregivers:
             print(f"\nAvailability for {caregiver.name}:")
             for day, shifts in caregiver.get_availability().items():
-                print(f"{day}: {shifts}")
+                formatted_shifts = ", ".join(
+                    [f"{shift}: {'Available' if available else 'Unavailable'}" for shift, available in shifts.items()]
+                )
+                print(f"Day {day}: {formatted_shifts}")
