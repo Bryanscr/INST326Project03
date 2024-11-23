@@ -1,0 +1,10 @@
+Weekly Pay Report
+Name: Annie, Hours Worked: 24, Pay Rate: $20.00/hr, Weekly Pay: $480.00
+Name: Chris, Hours Worked: 24, Pay Rate: $25.00/hr, Weekly Pay: $600.00
+Name: Emma, Hours Worked: 24, Pay Rate: $20.00/hr, Weekly Pay: $480.00
+Name: David, Hours Worked: 24, Pay Rate: $19.00/hr, Weekly Pay: $456.00
+Name: Ella, Hours Worked: 24, Pay Rate: $20.00/hr, Weekly Pay: $480.00
+Name: Frank, Hours Worked: 24, Pay Rate: $21.00/hr, Weekly Pay: $504.00
+Name: Grace, Hours Worked: 24, Pay Rate: $18.00/hr, Weekly Pay: $432.00
+Name: Hannah, Hours Worked: 24, Pay Rate: $22.00/hr, Weekly Pay: $528.00
+Total Weekly Pay for All Caregivers: $3960.00

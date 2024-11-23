@@ -7,18 +7,17 @@ class Caregiver:
         self.email = email
         self.pay_rate = pay_rate
         self.availability = {}
+        self.hours_worked = 0
 
-    def set_available(self, day, shift):
+    def set_available(self, day, shift, status = "available"):
         if day not in self.availability:
             self.availability[day] = {}
-        if shift in ["AM", "PM"]:
-            self.availability[day][shift] = True
+        self.availability[day][shift] = status
 
     def set_unavailable(self, day, shift):
         if day not in self.availability:
             self.availability[day] = {}
-        if shift in ["AM", "PM"]:
-            self.availability[day][shift] = False
+        self.availability[day][shift] = False
 
     def get_availability(self):
         return self.availability

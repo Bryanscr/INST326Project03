@@ -13,17 +13,23 @@ def generate_schedule(caregivers, year, month):
     # Helper function to find the best caregiver for a shift
     def find_best_caregiver(day, shift):
         best_caregiver = None
+        # Convert numeric day to day name 
+        weekday = calendar.weekday(year, month, day)  # 0=Monday, 6=Sunday
+        day_name = calendar.day_name[weekday]  # "Monday", "Tuesday", etc.
+
         for caregiver in caregivers:
-            # Check availability for this day and shift
-            if day in caregiver.availability and shift in caregiver.availability[day]:
-                status = caregiver.availability[day][shift]
+            # Check if caregiver is available for this day and shift
+            if day_name in caregiver.availability and shift in caregiver.availability[day_name]:
+                status = caregiver.availability[day_name][shift]
                 if status == "preferred":  # Prioritize "preferred" caregivers
-                    if best_caregiver is None or caregiver.hours < best_caregiver.hours:
+                    if best_caregiver is None or caregiver.hours_worked < best_caregiver.hours_worked:
                         best_caregiver = caregiver
                 elif status == "available":  # Consider "available" if no "preferred"
-                    if best_caregiver is None or best_caregiver.availability[day][shift] != "preferred":
-                        if best_caregiver is None or caregiver.hours < best_caregiver.hours:
-                            best_caregiver = caregiver
+                    if best_caregiver is None or (
+                        best_caregiver.availability[day_name][shift] != "preferred"
+                        and caregiver.hours_worked < best_caregiver.hours_worked
+                    ):
+                        best_caregiver = caregiver
         return best_caregiver
 
     # Assign caregivers to each shift
@@ -32,7 +38,10 @@ def generate_schedule(caregivers, year, month):
             caregiver = find_best_caregiver(day, shift)
             if caregiver:
                 schedule[day][shift] = caregiver.name
-                caregiver.hours += 6  # Each shift is 6 hours
+                caregiver.hours_worked += 6  # Each shift is 6 hours
+                print(f"Assigned {caregiver.name} to Day {day}, Shift {shift}")
+            else:
+                print(f"No caregiver available for Day {day}, Shift {shift}")
 
     return schedule
 

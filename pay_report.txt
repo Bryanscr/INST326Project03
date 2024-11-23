@@ -1,0 +1,4 @@
+Weekly Pay Report
+Name: Annie, Hours Worked: 30, Pay Rate: $20.00/hr, Weekly Pay: $600.00
+Name: Chris, Hours Worked: 40, Pay Rate: $25.00/hr, Weekly Pay: $1000.00
+Total Weekly Pay for All Caregivers: $1600.00
